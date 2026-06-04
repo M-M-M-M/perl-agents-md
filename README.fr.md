@@ -39,6 +39,19 @@ développement. Les formulations doivent donc rester suffisamment générales po
 être utiles hors de Codex, tout en conservant les détails pratiques nécessaires
 au travail quotidien sur du Perl.
 
+## Déploiement
+
+Pour utiliser ces consignes dans un autre dépôt Perl, copier ces fichiers à la
+racine du dépôt cible :
+
+- `AGENTS.md`
+- `.perltidyrc`
+
+Relire ensuite `AGENTS.md` et adapter les détails propres au projet, comme les
+commandes de test, les outils de dépendances, les modules préférés ou les règles
+de workflow. Garder `.perltidyrc` inchangé pour conserver le style de formatage
+fourni par ce projet.
+
 ## Formatage Perl
 
 Le dépôt contient une configuration perltidy de référence dans

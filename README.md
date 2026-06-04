@@ -37,6 +37,18 @@ assistants. The wording should therefore remain general enough to be useful
 outside Codex, while keeping the practical details needed for day-to-day Perl
 work.
 
+## Deployment
+
+To use these guidelines in another Perl repository, copy these files to the root
+of the target repository:
+
+- `AGENTS.md`
+- `.perltidyrc`
+
+Then review `AGENTS.md` and adapt project-specific details such as test commands,
+dependency tooling, preferred modules, or workflow rules. Keep `.perltidyrc`
+unchanged if you want to preserve the formatting style provided by this project.
+
 ## Perl Formatting
 
 The repository includes a reference perltidy configuration in
