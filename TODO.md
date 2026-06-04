@@ -28,4 +28,4 @@
 - [x] after each changes update doc README.md and README.xx.md language versions. 
 - [x] eventually update the TODO.md - make as done - [x]
 - [x] eventually update a CHANGELOG.md
-
+- [x] add a license, add a reference to licence of Yegor and linked as inspiration

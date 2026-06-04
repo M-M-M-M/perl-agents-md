@@ -48,6 +48,17 @@ Detailed perltidy usage notes are documented in
 project-level rule: format with perltidy, use the provided configuration, and do
 not change it unless the user explicitly asks for style changes.
 
+## Acknowledgements
+
+This project was inspired by Yegor Bugayenko's
+[`yegor256/prompt`](https://github.com/yegor256/prompt), adapted here for
+Perl-focused coding agents. See
+[`THIRD-PARTY-NOTICES.md`](THIRD-PARTY-NOTICES.md) for license notices.
+
+## License
+
+This project is licensed under the MIT License. See [LICENSE](LICENSE).
+
 ## Project Status
 
 `AGENTS.md` is an initial version. It may still evolve to clarify instructions,

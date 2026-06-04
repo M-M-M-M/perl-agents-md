@@ -51,6 +51,17 @@ seulement la regle de niveau projet : formater avec perltidy, utiliser la
 configuration fournie, et ne pas la modifier sauf demande explicite de changement
 de style.
 
+## Remerciements
+
+Ce projet s'inspire du depot
+[`yegor256/prompt`](https://github.com/yegor256/prompt) de Yegor Bugayenko,
+adapte ici pour des agents de codage specialises Perl. Voir
+[`THIRD-PARTY-NOTICES.md`](THIRD-PARTY-NOTICES.md) pour les notices de licence.
+
+## Licence
+
+Ce projet est distribue sous licence MIT. Voir [LICENSE](LICENSE).
+
 ## Etat du projet
 
 Le fichier `AGENTS.md` est une premiere version. Il peut encore evoluer pour
