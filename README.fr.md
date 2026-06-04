@@ -1,70 +1,70 @@
 # perl-agents-md
 
-Consignes `AGENTS.md` reutilisables pour guider les agents de codage sur des
+Consignes `AGENTS.md` réutilisables pour guider les agents de codage sur des
 projets Perl.
 
-Ce depot contient une premiere version d'un fichier `AGENTS.md` destine a aider
-les agents de codage a travailler correctement sur des projets Perl.
+Ce dépôt contient une première version d'un fichier `AGENTS.md` destiné à aider
+les agents de codage à travailler correctement sur des projets Perl.
 
-Le but est de formaliser des consignes claires et reutilisables pour guider un
-assistant de developpement lors de la lecture, de la modification et de la
-validation de code Perl. Le fichier doit servir de reference de travail pour des
-outils comme Codex, et pouvoir etre adapte plus tard a d'autres environnements
+Le but est de formaliser des consignes claires et réutilisables pour guider un
+assistant de développement lors de la lecture, de la modification et de la
+validation de code Perl. Le fichier doit servir de référence de travail pour des
+outils comme Codex, et pouvoir être adapté plus tard à d'autres environnements
 d'agents comme Claude ou Antigravity.
 
 ## Objectif
 
-`AGENTS.md` decrit les pratiques attendues pour coder en Perl avec rigueur :
+`AGENTS.md` décrit les pratiques attendues pour coder en Perl avec rigueur :
 
 - discipline de travail avant modification du code ;
 - usage des outils Perl habituels comme `perltidy`, `perlcritic`, `prove`,
   `yath`, `cpanm` ou `carton` ;
 - style de code lisible, explicite et maintenable ;
-- conventions pour les modules, objets, erreurs, tests et dependances ;
-- preference pour les petites modifications ciblees plutot que les refontes
+- conventions pour les modules, objets, erreurs, tests et dépendances ;
+- préférence pour les petites modifications ciblées plutôt que les refontes
   implicites.
 
-L'intention n'est pas de creer un framework, mais un document d'instructions que
-l'on peut copier, adapter ou inclure dans des depots Perl afin d'ameliorer la
-qualite des contributions produites avec un agent.
+L'intention n'est pas de créer un framework, mais un document d'instructions que
+l'on peut copier, adapter ou inclure dans des dépôts Perl afin d'améliorer la
+qualité des contributions produites avec un agent.
 
-## Usage prevu
+## Usage prévu
 
-Le cas d'usage principal est Codex : placer ce fichier dans un depot Perl permet
-a l'agent de connaitre les attentes du projet avant d'ecrire ou de modifier du
+Le cas d'usage principal est Codex : placer ce fichier dans un dépôt Perl permet
+à l'agent de connaître les attentes du projet avant d'écrire ou de modifier du
 code.
 
-A terme, le contenu pourra aussi servir de base pour d'autres assistants de
-developpement. Les formulations doivent donc rester suffisamment generales pour
-etre utiles hors de Codex, tout en conservant les details pratiques necessaires
+À terme, le contenu pourra aussi servir de base pour d'autres assistants de
+développement. Les formulations doivent donc rester suffisamment générales pour
+être utiles hors de Codex, tout en conservant les détails pratiques nécessaires
 au travail quotidien sur du Perl.
 
 ## Formatage Perl
 
-Le depot contient une configuration perltidy de reference dans
+Le dépôt contient une configuration perltidy de référence dans
 [`.perltidyrc`](.perltidyrc). Les agents doivent utiliser ce fichier tel quel
 pour formater le code Perl, car il correspond au style local attendu.
 
-Les notes detaillees d'utilisation de perltidy sont documentees dans
+Les notes détaillées d'utilisation de perltidy sont documentées dans
 [`DOCUMENTATION.fr.md`](DOCUMENTATION.fr.md). Le README principal conserve
-seulement la regle de niveau projet : formater avec perltidy, utiliser la
+seulement la règle de niveau projet : formater avec perltidy, utiliser la
 configuration fournie, et ne pas la modifier sauf demande explicite de changement
 de style.
 
 ## Remerciements
 
-Ce projet s'inspire du depot
+Ce projet s'inspire du dépôt
 [`yegor256/prompt`](https://github.com/yegor256/prompt) de Yegor Bugayenko,
-adapte ici pour des agents de codage specialises Perl. Voir
+adapté ici pour des agents de codage spécialisés Perl. Voir
 [`THIRD-PARTY-NOTICES.md`](THIRD-PARTY-NOTICES.md) pour les notices de licence.
 
 ## Licence
 
-Ce projet est distribue sous licence MIT. Voir [LICENSE](LICENSE).
+Ce projet est distribué sous licence MIT. Voir [LICENSE](LICENSE).
 
-## Etat du projet
+## État du projet
 
-Le fichier `AGENTS.md` est une premiere version. Il peut encore evoluer pour
-clarifier les consignes, supprimer les doublons, separer les regles generales des
-regles propres a un outil, ou ajouter des variantes selon les types de projets
+Le fichier `AGENTS.md` est une première version. Il peut encore évoluer pour
+clarifier les consignes, supprimer les doublons, séparer les règles générales des
+règles propres à un outil, ou ajouter des variantes selon les types de projets
 Perl.
