@@ -1,0 +1,43 @@
+# perltidy rules inferred from the existing scripts in this directory.
+
+# Two-space indentation is the most common block style in the older scripts.
+--indent-columns=2
+--continuation-indentation=2
+--notabs
+
+# Preserve the current manual line breaks, especially SQL/heredoc-adjacent code
+# and hashes/lists using leading commas.
+--freeze-newlines
+--keep-old-blank-lines=2
+--maximum-consecutive-blank-lines=3
+--maximum-line-length=160
+
+# Dominant local style:
+#   use strict ;
+#   if (...) {
+#     ...
+#   } else {
+#     ...
+#   }
+--space-terminal-semicolon
+-sak="if unless while for foreach"
+--opening-brace-always-on-right
+--cuddled-else
+
+# Keep parentheses/brackets/braces reasonably tight for hash and array access,
+# while still allowing the existing binmode( STDOUT, ... ) style to survive.
+--paren-tightness=1
+--square-bracket-tightness=1
+--brace-tightness=1
+--block-brace-tightness=1
+
+# Follow existing list wrapping decisions instead of aggressively rebuilding
+# argument lists and hash literals.
+--break-at-old-comma-breakpoints
+--break-at-old-logical-breakpoints
+--break-at-old-method-breakpoints
+--break-at-old-keyword-breakpoints
+--break-at-old-ternary-breakpoints
+
+# Keep side comments readable.
+--minimum-space-to-comment=4
