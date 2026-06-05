@@ -17,8 +17,8 @@ The French version is available in [README.fr.md](README.fr.md).
 `AGENTS.md` describes the expected practices for writing Perl with discipline:
 
 - disciplined workflow before changing code;
-- use of common Perl tools such as `perltidy`, `perlcritic`, `prove`, `yath`,
-  `cpanm`, or `carton`;
+- use of common Perl tools such as `perltidy`, `perlcritic`, `prove`, or
+  `cpanm`;
 - readable, explicit, and maintainable code style;
 - conventions for modules, objects, errors, tests, and dependencies;
 - preference for small, focused changes over implicit rewrites.

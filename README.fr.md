@@ -17,8 +17,8 @@ d'agents comme Claude ou Antigravity.
 `AGENTS.md` décrit les pratiques attendues pour coder en Perl avec rigueur :
 
 - discipline de travail avant modification du code ;
-- usage des outils Perl habituels comme `perltidy`, `perlcritic`, `prove`,
-  `yath`, `cpanm` ou `carton` ;
+- usage des outils Perl habituels comme `perltidy`, `perlcritic`, `prove` ou
+  `cpanm` ;
 - style de code lisible, explicite et maintenable ;
 - conventions pour les modules, objets, erreurs, tests et dépendances ;
 - préférence pour les petites modifications ciblées plutôt que les refontes
