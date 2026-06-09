@@ -77,7 +77,9 @@ Ce projet est distribué sous licence MIT. Voir [LICENSE](LICENSE).
 
 ## État du projet
 
-Le fichier `AGENTS.md` est une première version. Il peut encore évoluer pour
-clarifier les consignes, supprimer les doublons, séparer les règles générales des
-règles propres à un outil, ou ajouter des variantes selon les types de projets
-Perl.
+La version 1.0.0 est la première version stable de ces consignes. Voir
+[CHANGELOG.md](CHANGELOG.md) pour le détail de la version.
+
+Le fichier `AGENTS.md` pourra continuer à évoluer pour clarifier les consignes,
+supprimer les doublons, séparer les règles générales des règles propres à un
+outil, ou ajouter des variantes selon les types de projets Perl.

@@ -73,6 +73,9 @@ This project is licensed under the MIT License. See [LICENSE](LICENSE).
 
 ## Project Status
 
-`AGENTS.md` is an initial version. It may still evolve to clarify instructions,
-remove duplication, separate general rules from tool-specific rules, or add
-variants for different kinds of Perl projects.
+Version 1.0.0 is the first stable release of these guidelines. See
+[CHANGELOG.md](CHANGELOG.md) for release details.
+
+`AGENTS.md` may continue to evolve to clarify instructions, remove duplication,
+separate general rules from tool-specific rules, or add variants for different
+kinds of Perl projects.

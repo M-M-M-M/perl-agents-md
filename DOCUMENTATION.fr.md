@@ -6,6 +6,11 @@ appliquer les outils.
 
 La version anglaise est disponible dans [DOCUMENTATION.md](DOCUMENTATION.md).
 
+## Version
+
+Cette documentation s'applique à la version 1.0.0, la première version stable.
+Le détail de la version est consigné dans [CHANGELOG.md](CHANGELOG.md).
+
 ## Formatage Perl avec perltidy
 
 Ce dépôt fournit un fichier `.perltidyrc` à la racine. C'est la configuration de

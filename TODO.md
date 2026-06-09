@@ -29,3 +29,4 @@
 - [x] eventually update the TODO.md - make as done - [x]
 - [x] eventually update a CHANGELOG.md
 - [x] add a license, add a reference to licence of Yegor and linked as inspiration
+- [x] publish version 1.0.0

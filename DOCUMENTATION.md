@@ -6,6 +6,11 @@ the tooling.
 
 The French version is available in [DOCUMENTATION.fr.md](DOCUMENTATION.fr.md).
 
+## Version
+
+This documentation applies to version 1.0.0, the first stable release. Release
+details are recorded in [CHANGELOG.md](CHANGELOG.md).
+
 ## Perl Formatting With perltidy
 
 This repository provides a `.perltidyrc` file at the repository root. It is the
