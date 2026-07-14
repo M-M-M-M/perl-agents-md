@@ -8,8 +8,8 @@ The French version is available in [DOCUMENTATION.fr.md](DOCUMENTATION.fr.md).
 
 ## Version
 
-This documentation applies to version 1.0.0, the first stable release. Release
-details are recorded in [CHANGELOG.md](CHANGELOG.md).
+This documentation applies to version 1.1.0. Release details are recorded in
+[CHANGELOG.md](CHANGELOG.md).
 
 ## Perl Formatting With perltidy
 
@@ -18,6 +18,19 @@ reference formatting configuration for Perl code and should be used as-is.
 
 `perltidy` automatically looks for `.perltidyrc` in the current working
 directory, so running commands from the repository root is enough.
+
+## Perl Signatures
+
+When a new function or a targeted refactor has parameters whose meaning is made
+clearer by signatures, enable them explicitly in that file:
+
+```perl
+use feature 'signatures';
+```
+
+Use signatures to improve readability, not as a mechanical rewrite rule. Keep
+simple code simple, and respect the existing style of files that do not already
+use signatures unless the refactor clearly benefits from them.
 
 ## Preview Formatting
 

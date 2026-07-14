@@ -20,6 +20,8 @@ d'agents comme Claude ou Antigravity.
 - usage des outils Perl habituels comme `perltidy`, `perlcritic`, `prove` ou
   `cpanm` ;
 - style de code lisible, explicite et maintenable ;
+- pragmas de fonctionnalités Perl explicites, y compris les signatures quand
+  elles améliorent la lisibilité des paramètres ;
 - conventions pour les modules, objets, erreurs, tests et dépendances ;
 - préférence pour les petites modifications ciblées plutôt que les refontes
   implicites.
@@ -77,8 +79,9 @@ Ce projet est distribué sous licence MIT. Voir [LICENSE](LICENSE).
 
 ## État du projet
 
-La version 1.0.0 est la première version stable de ces consignes. Voir
-[CHANGELOG.md](CHANGELOG.md) pour le détail de la version.
+La version 1.1.0 est la version courante de ces consignes. La version 1.0.0
+était la première version stable. Voir [CHANGELOG.md](CHANGELOG.md) pour le
+détail de la version.
 
 Le fichier `AGENTS.md` pourra continuer à évoluer pour clarifier les consignes,
 supprimer les doublons, séparer les règles générales des règles propres à un

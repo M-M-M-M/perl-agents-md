@@ -20,6 +20,8 @@ The French version is available in [README.fr.md](README.fr.md).
 - use of common Perl tools such as `perltidy`, `perlcritic`, `prove`, or
   `cpanm`;
 - readable, explicit, and maintainable code style;
+- explicit Perl feature pragmas, including signatures when they improve
+  parameter readability;
 - conventions for modules, objects, errors, tests, and dependencies;
 - preference for small, focused changes over implicit rewrites.
 
@@ -73,8 +75,8 @@ This project is licensed under the MIT License. See [LICENSE](LICENSE).
 
 ## Project Status
 
-Version 1.0.0 is the first stable release of these guidelines. See
-[CHANGELOG.md](CHANGELOG.md) for release details.
+Version 1.1.0 is the current release of these guidelines. Version 1.0.0 was the
+first stable release. See [CHANGELOG.md](CHANGELOG.md) for release details.
 
 `AGENTS.md` may continue to evolve to clarify instructions, remove duplication,
 separate general rules from tool-specific rules, or add variants for different

@@ -28,6 +28,7 @@ Do not merge changes without committing first and getting review or approval whe
 
 Use strict and warnings in every file.
 Use feature pragmas explicitly, not globally.
+Use `use feature 'signatures';` explicitly for new functions or refactorings when signatures improve parameter readability, but do not apply signatures mechanically to simple code or files whose existing style avoids them.
 Prefer lexical variables with my.
 Avoid package globals unless required by the framework.
 Avoid indirect object syntax.

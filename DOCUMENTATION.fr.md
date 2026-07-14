@@ -8,8 +8,8 @@ La version anglaise est disponible dans [DOCUMENTATION.md](DOCUMENTATION.md).
 
 ## Version
 
-Cette documentation s'applique à la version 1.0.0, la première version stable.
-Le détail de la version est consigné dans [CHANGELOG.md](CHANGELOG.md).
+Cette documentation s'applique à la version 1.1.0. Le détail de la version est
+consigné dans [CHANGELOG.md](CHANGELOG.md).
 
 ## Formatage Perl avec perltidy
 
@@ -18,6 +18,21 @@ formatage de référence pour le code Perl et elle doit être utilisée telle qu
 
 `perltidy` cherche automatiquement `.perltidyrc` dans le répertoire courant. Il
 suffit donc de lancer les commandes depuis la racine du dépôt.
+
+## Signatures Perl
+
+Quand une nouvelle fonction ou un refactoring ciblé possède des paramètres dont
+le sens devient plus clair avec des signatures, les activer explicitement dans
+le fichier :
+
+```perl
+use feature 'signatures';
+```
+
+Utiliser les signatures pour améliorer la lisibilité, pas comme une règle de
+réécriture mécanique. Garder le code simple lorsqu'il l'est déjà, et respecter
+le style existant des fichiers qui n'utilisent pas encore les signatures sauf
+si le refactoring en bénéficie clairement.
 
 ## Prévisualiser le formatage
 
