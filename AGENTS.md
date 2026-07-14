@@ -1,3 +1,5 @@
+AGENTS.md version: 1.2.0
+
 # Tools
 
 Use GNU command-line tools such as gsed, gfind, ggrep, and gcat to ensure consistent behavior across macOS and Linux.
@@ -78,6 +80,7 @@ Use exceptions consistently; do not mix silent failure, undef, and die randomly.
 # Code Style
 
 Format Perl files with perltidy using the repository `.perltidyrc`.
+When formatting files in place, prefer `perltidy -b -bext='/' path/to/file.pl` to avoid creating `.bak` backup files.
 Do not change `.perltidyrc` unless the user explicitly asks for style changes.
 No inline comments for obvious code.
 Use comments to explain why, not what.

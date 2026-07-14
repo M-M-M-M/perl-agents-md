@@ -64,7 +64,9 @@ Les notes détaillées d'utilisation de perltidy sont documentées dans
 [`DOCUMENTATION.fr.md`](DOCUMENTATION.fr.md). Le README principal conserve
 seulement la règle de niveau projet : formater avec perltidy, utiliser la
 configuration fournie, et ne pas la modifier sauf demande explicite de changement
-de style.
+de style. Pour formater en place, préférer
+`perltidy -b -bext='/' chemin/vers/fichier.pl` afin d'éviter de laisser des
+sauvegardes `.bak` dans l'arbre de travail.
 
 ## Remerciements
 
@@ -79,9 +81,11 @@ Ce projet est distribué sous licence MIT. Voir [LICENSE](LICENSE).
 
 ## État du projet
 
-La version 1.1.0 est la version courante de ces consignes. La version 1.0.0
-était la première version stable. Voir [CHANGELOG.md](CHANGELOG.md) pour le
-détail de la version.
+La version 1.2.0 est la version courante de ces consignes. `AGENTS.md` déclare
+cette version en tête de fichier afin d'identifier rapidement la version
+utilisée. La version 1.1.0 a ajouté les consignes explicites sur les signatures
+Perl, et la version 1.0.0 était la première version stable. Voir
+[CHANGELOG.md](CHANGELOG.md) pour le détail des versions.
 
 Le fichier `AGENTS.md` pourra continuer à évoluer pour clarifier les consignes,
 supprimer les doublons, séparer les règles générales des règles propres à un

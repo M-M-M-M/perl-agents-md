@@ -8,7 +8,7 @@ La version anglaise est disponible dans [DOCUMENTATION.md](DOCUMENTATION.md).
 
 ## Version
 
-Cette documentation s'applique à la version 1.1.0. Le détail de la version est
+Cette documentation s'applique à la version 1.2.0. Le détail de la version est
 consigné dans [CHANGELOG.md](CHANGELOG.md).
 
 ## Formatage Perl avec perltidy

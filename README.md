@@ -60,7 +60,9 @@ Perl code, because it matches the intended local style.
 Detailed perltidy usage notes are documented in
 [`DOCUMENTATION.md`](DOCUMENTATION.md). The main README only records the
 project-level rule: format with perltidy, use the provided configuration, and do
-not change it unless the user explicitly asks for style changes.
+not change it unless the user explicitly asks for style changes. When formatting
+in place, prefer `perltidy -b -bext='/' path/to/file.pl` to avoid leaving `.bak`
+backup files in the working tree.
 
 ## Acknowledgements
 
@@ -75,8 +77,11 @@ This project is licensed under the MIT License. See [LICENSE](LICENSE).
 
 ## Project Status
 
-Version 1.1.0 is the current release of these guidelines. Version 1.0.0 was the
-first stable release. See [CHANGELOG.md](CHANGELOG.md) for release details.
+Version 1.2.0 is the current release of these guidelines. `AGENTS.md` declares
+this version at the top of the file so users can quickly identify which release
+they are using. Version 1.1.0 added explicit Perl signature guidance, and
+version 1.0.0 was the first stable release. See
+[CHANGELOG.md](CHANGELOG.md) for release details.
 
 `AGENTS.md` may continue to evolve to clarify instructions, remove duplication,
 separate general rules from tool-specific rules, or add variants for different

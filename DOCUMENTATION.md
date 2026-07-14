@@ -8,7 +8,7 @@ The French version is available in [DOCUMENTATION.fr.md](DOCUMENTATION.fr.md).
 
 ## Version
 
-This documentation applies to version 1.1.0. Release details are recorded in
+This documentation applies to version 1.2.0. Release details are recorded in
 [CHANGELOG.md](CHANGELOG.md).
 
 ## Perl Formatting With perltidy

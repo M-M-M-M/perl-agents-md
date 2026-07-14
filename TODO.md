@@ -29,6 +29,7 @@ Actions are classified by some main categories.
 # Code Style
 
 - [x] add the perltidyrc
+- [x] proposer d'utiliser perltidy -b -bext='/' myfile.pl pour éviter de créer des .bak
 
 # Tests
 
@@ -41,3 +42,4 @@ Actions are classified by some main categories.
 - [x] eventually update a CHANGELOG.md
 - [x] add a license, add a reference to licence of Yegor and linked as inspiration
 - [x] publish version 1.0.0
+- [x] include la version au début de AGENTS.md pour savoir quelle version  on utilise
