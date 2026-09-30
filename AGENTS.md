@@ -1,4 +1,4 @@
-AGENTS.md version: 1.3.0
+AGENTS.md version: 1.3.1
 
 # Tools
 
@@ -56,7 +56,7 @@ Use map for transformation, grep for filtering, foreach for side effects.
 Do not introduce heavy dependencies without justification.
 Error/log messages: no trailing period, single sentence, include context.
 When a non-core module is needed, prefer this known module set before introducing another dependency: Archive::Zip, Archive::Zip::MemberRead, Array::Compare, Cwd, DBD::Pg, DBD::SQLite, DBI, Data::Dumper, Data::Peek, Date::Calc, DateTime, DateTime::Format::Excel, DateTime::Format::ISO8601, Devel::NYTProf, Encode, Excel::Writer::XLSX, Excel::Writer::XLSX::Utility, File::Copy, File::Path, File::Which, Getopt::Long, HTTP::Cookies, HTTP::Request::Common, I18N::Langinfo, IO::Pty, JSON, JSON::PP, JSON::Lines, LWP::UserAgent, List::MoreUtils, List::Util, Mojolicious::Lite, Math::Units, MIME::Base64, MIME::Lite, MIME::Parser, Net::LDAP, Net::SFTP::Foreign, Perl::Tidy, REST::Client, Scalar::Util, Sort::Key, Schedule::RateLimiter, Spreadsheet::XLSX, Text::CSV, Text::Iconv, Time::Duration, Time::HiRes, Time::Limit, URI::Escape, XML::Hash, XML::XML2JSON, XML::LibXML, XML::LibXML::XPathContext, Math::Units, Test::MockModule, threads, threads::shared, Thread::Queue, utf8, utf8::all, strict
-Before introducing new modules, check and select those that sounds maintained.
+Before introducing new modules, prefer modules that are actively maintained.
 
 # Objects
 
@@ -128,6 +128,7 @@ Run test coverage.
 # Markdown
 
 Use Prettier for Markdown formatting when available.
+Do not run Prettier on AGENTS.md or CHANGELOG.md unless the user explicitly asks or the diff is reviewed before commit.
 Use markdownlint-cli2 for Markdown linting when available.
 After modifying Markdown files, run Prettier and then markdownlint-cli2 on the modified files when available.
 Let Prettier format Markdown tables; do not manually align table columns.

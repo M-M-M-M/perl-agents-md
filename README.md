@@ -77,11 +77,11 @@ This project is licensed under the MIT License. See [LICENSE](LICENSE).
 
 ## Project Status
 
-Version 1.3.0 is the current release of these guidelines. `AGENTS.md` declares
+Version 1.3.1 is the current release of these guidelines. `AGENTS.md` declares
 this version at the top of the file so users can quickly identify which release
-they are using. Version 1.2.0 added formatting guidance and the version marker,
-version 1.1.0 added explicit Perl signature guidance, and version 1.0.0 was the
-first stable release. See
+they are using. Version 1.3.0 added Markdown guidance, version 1.2.0 added
+formatting guidance and the version marker, version 1.1.0 added explicit Perl
+signature guidance, and version 1.0.0 was the first stable release. See
 [CHANGELOG.md](CHANGELOG.md) for release details.
 
 `AGENTS.md` may continue to evolve to clarify instructions, remove duplication,
