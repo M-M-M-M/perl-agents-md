@@ -1,4 +1,4 @@
-AGENTS.md version: 1.2.0
+AGENTS.md version: 1.3.0
 
 # Tools
 
@@ -125,8 +125,21 @@ Do not test accessors unless they encode behavior.
 Do not assert exact error messages unless the message is part of the public contract.
 Run test coverage.
 
+# Markdown
+
+Use Prettier for Markdown formatting when available.
+Use markdownlint-cli2 for Markdown linting when available.
+After modifying Markdown files, run Prettier and then markdownlint-cli2 on the modified files when available.
+Let Prettier format Markdown tables; do not manually align table columns.
+Do not reformat unrelated Markdown files.
+Review the resulting diff after formatting and avoid unrelated formatting changes.
+Known markdownlint exceptions are acceptable for AGENTS.md and CHANGELOG.md when they come from intentional project structure.
+Do not rewrite AGENTS.md or CHANGELOG.md only to satisfy markdownlint line-length, first-heading, bare-URL, or duplicate-heading rules.
+Allow markdownlint line-length exceptions for Markdown tables when Prettier expands columns beyond the configured limit.
+
 # Documentation
 
-After each changes update doc README.md and README.xx.md language versions. Same for DOCUMENTATION.md and DOCUMENTATION.xx.md if documentation is not managed in the README.md.
-Eventually update the TODO.md - make as done - [x]
-Eventually update a CHANGELOG.md
+Update README.md and README.xx.md language versions when a change affects documented behavior, installation, configuration, or usage.
+Apply the same rule to DOCUMENTATION.md and DOCUMENTATION.xx.md when documentation is maintained there instead of the README.
+Update TODO.md when a completed task is tracked there, marking it as `- [x]`.
+Update CHANGELOG.md when the change is user-visible or otherwise belongs in the changelog.
