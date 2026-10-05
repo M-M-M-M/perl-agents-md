@@ -7,6 +7,25 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## [Unreleased]
 
+## [1.4.0] - 2026-10-05
+
+### Added
+
+- Guidance to consult relevant existing project documentation before changes,
+  including project tasks and release history when relevant.
+- Guidance for an optional documentation index identifying authoritative
+  documents and when to consult them.
+
+### Changed
+
+- Made documentation maintenance part of each change, preserving canonical
+  documents and keeping language translations synchronized.
+- Clarified that document names are examples and do not require creating new
+  files or imposing a documentation structure on other projects.
+- Replaced unconditional Git pulls with working-tree and branch inspection,
+  preserving existing changes and synchronizing with upstream only when safe.
+- Updated English and French documentation for version 1.4.0.
+
 ## [1.3.1] - 2026-09-30
 
 ### Changed
@@ -49,7 +68,8 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 - English and French project documentation.
 - MIT license and third-party attribution notices.
 
-[Unreleased]: https://github.com/M-M-M-M/perl-agents-md/compare/v1.3.1...HEAD
+[Unreleased]: https://github.com/M-M-M-M/perl-agents-md/compare/v1.4.0...HEAD
+[1.4.0]: https://github.com/M-M-M-M/perl-agents-md/compare/v1.3.1...v1.4.0
 [1.3.1]: https://github.com/M-M-M-M/perl-agents-md/compare/v1.3.0...v1.3.1
 [1.3.0]: https://github.com/M-M-M-M/perl-agents-md/compare/v1.2.0...v1.3.0
 [1.2.0]: https://github.com/M-M-M-M/perl-agents-md/compare/v1.1.0...v1.2.0

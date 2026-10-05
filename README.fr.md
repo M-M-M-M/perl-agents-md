@@ -17,6 +17,10 @@ d'agents comme Claude ou Antigravity.
 `AGENTS.md` décrit les pratiques attendues pour coder en Perl avec rigueur :
 
 - discipline de travail avant modification du code ;
+- consultation de la documentation pertinente et du contexte existant du projet
+  avant toute modification ;
+- maintenance de la documentation dans le cadre de la modification, en conservant
+  les documents de référence existants comme sources faisant autorité ;
 - usage des outils Perl habituels comme `perltidy`, `perlcritic`, `prove` ou
   `cpanm` ;
 - style de code lisible, explicite et maintenable ;
@@ -40,6 +44,46 @@ code.
 développement. Les formulations doivent donc rester suffisamment générales pour
 être utiles hors de Codex, tout en conservant les détails pratiques nécessaires
 au travail quotidien sur du Perl.
+
+## Documentation du projet
+
+Pour les projets non triviaux, les agents de codage travaillent plus efficacement
+lorsqu'ils peuvent trouver les informations de référence avant de modifier le
+code. `AGENTS.md` leur demande donc de consulter la documentation existante
+pertinente plutôt que de reconstruire le contexte à partir d'hypothèses ou de
+lire tous les documents.
+
+Les noms de documents dans les consignes sont des exemples. Utiliser les
+équivalents existants du projet lorsqu'ils sont disponibles ; les consignes
+n'imposent pas de créer ces fichiers.
+
+Les dépôts qui contiennent une documentation importante peuvent bénéficier d'un
+petit index ou d'une table des matières. Cet index doit identifier les documents
+faisant autorité et indiquer dans quels cas les consulter.
+
+Par exemple :
+
+```markdown
+# Index de la documentation
+
+- `architecture.md` — architecture du système ; à lire avant les changements
+  structurels.
+- `authentication.md` — authentification ; à lire pour les changements
+  d'authentification ou d'autorisation.
+- `database.md` — persistance ; à lire pour les changements de schéma ou de
+  base de données.
+- `deployment.md` — déploiement en production ; à lire pour les changements
+  d'exécution ou de déploiement.
+```
+
+Cet index est facultatif. Les petits dépôts qui ne contiennent que quelques
+documents n'en ont généralement pas besoin.
+
+L'index doit renvoyer vers la documentation de référence existante plutôt que
+d'en dupliquer le contenu. Lorsque le comportement du projet change, les agents
+doivent mettre à jour le document de référence plutôt que créer une seconde
+description qui pourrait ensuite diverger. Les traductions sont admises et
+doivent rester synchronisées avec le document source.
 
 ## Déploiement
 
@@ -81,10 +125,14 @@ Ce projet est distribué sous licence MIT. Voir [LICENSE](LICENSE).
 
 ## État du projet
 
-La version 1.3.1 est la version courante de ces consignes. `AGENTS.md` déclare
+La version 1.4.0 est la version courante de ces consignes. `AGENTS.md` déclare
 cette version en tête de fichier afin d'identifier rapidement la version
-utilisée. La version 1.3.0 a ajouté les consignes Markdown, la version 1.2.0 a
-ajouté les consignes de formatage et le marqueur de version, la version 1.1.0 a
+utilisée. La version 1.4.0 a ajouté les consignes sur le contexte du projet et
+la maintenance de la documentation : consulter les documents pertinents avant
+les modifications, préserver les documents de référence et synchroniser le
+dépôt de manière plus prudente. La version 1.3.0 a ajouté les consignes Markdown,
+la version 1.2.0 a ajouté les consignes de formatage et le marqueur de version,
+la version 1.1.0 a
 ajouté les consignes explicites sur les signatures Perl, et la version 1.0.0
 était la première version stable. Voir [CHANGELOG.md](CHANGELOG.md) pour le
 détail des versions.

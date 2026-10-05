@@ -1,4 +1,4 @@
-AGENTS.md version: 1.3.1
+AGENTS.md version: 1.4.0
 
 # Tools
 
@@ -17,7 +17,10 @@ Stay on scope; refactor only what the task requires.
 Respect the requested change scope: test-only requests should not modify production code, and code-only requests should not rewrite tests beyond the requested behavior.
 Keep test and production changes tied to the same behavior; avoid unrelated side effects.
 Design top-down: behavior before modules, interfaces before implementation.
-Git pull before making any changes.
+Before making changes, inspect the working tree and current branch.
+Do not overwrite or discard existing user changes.
+When the current branch tracks an upstream branch, synchronize with upstream before making changes when it is safe to do so, to avoid developing against a stale base and creating unnecessary merge conflicts.
+Do not pull automatically when the working tree is dirty or synchronization could interfere with existing work.
 Always TDD: reproduce bugs/features with tests before fixing.
 Keep commits focused on one logical change; do not mix unrelated work in the same commit.
 Use debug logging for hard problems, preferably through Log::Any or an existing project logger.
@@ -25,6 +28,17 @@ Don't fight upstream bugs; suggest filing an issue and wait for a fix unless a s
 Avoid large changes; leave TODO puzzles for follow-up.
 Flag smells and refactoring; suggest issues, don't fix silently.
 Do not merge changes without committing first and getting review or approval when the workflow requires it.
+
+# Project Context
+
+Before making changes, inspect existing project documentation relevant to the task.
+The document names below are examples; use the project's existing equivalents when available. These guidelines do not require creating those files or a documentation index.
+
+- Consult relevant project documentation, such as `README.md`, `DOCUMENTATION.md`, or `DEPLOYMENT.md`, before changing documented behavior, installation, deployment, configuration, or public interfaces.
+- Consult `TODO.md` when present to understand related completed, current, and planned work.
+- Consult `CHANGELOG.md` when historical behavior or compatibility may matter.
+- Prefer existing project documentation and code over assumptions about how the project works.
+- When a repository contains substantial documentation, prefer a small documentation index or table of contents that identifies authoritative documents and when they are relevant. Use it to locate documentation relevant to the task instead of reading all project documentation.
 
 # Perl
 
@@ -140,7 +154,11 @@ Allow markdownlint line-length exceptions for Markdown tables when Prettier expa
 
 # Documentation
 
+Treat documentation as part of the change, not as a separate follow-up task.
+Prefer updating the canonical document over creating a second description of the same behavior.
+Avoid independent, overlapping descriptions of the same project behavior; link to the canonical documentation instead. Language translations are supported and should remain synchronized with the source document.
 Update README.md and README.xx.md language versions when a change affects documented behavior, installation, configuration, or usage.
 Apply the same rule to DOCUMENTATION.md and DOCUMENTATION.xx.md when documentation is maintained there instead of the README.
 Update TODO.md when a completed task is tracked there, marking it as `- [x]`.
 Update CHANGELOG.md when the change is user-visible or otherwise belongs in the changelog.
+Before finishing a task, check whether the implementation changed any documented behavior, assumptions, deployment instructions, TODO items, or changelog-worthy behavior.

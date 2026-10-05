@@ -17,6 +17,10 @@ The French version is available in [README.fr.md](README.fr.md).
 `AGENTS.md` describes the expected practices for writing Perl with discipline:
 
 - disciplined workflow before changing code;
+- consultation of relevant project documentation and existing project context
+  before making changes;
+- maintenance of documentation as part of the change, with existing canonical
+  documentation kept authoritative;
 - use of common Perl tools such as `perltidy`, `perlcritic`, `prove`, or
   `cpanm`;
 - readable, explicit, and maintainable code style;
@@ -38,6 +42,41 @@ Over time, the content may also serve as a base for other development
 assistants. The wording should therefore remain general enough to be useful
 outside Codex, while keeping the practical details needed for day-to-day Perl
 work.
+
+## Project Documentation
+
+For non-trivial projects, coding agents work more effectively when they can
+locate authoritative project information before changing code. `AGENTS.md`
+therefore instructs agents to consult relevant existing documentation rather
+than reconstructing project context from assumptions or reading every document.
+
+Document names in the guidelines are examples. Use the project's existing
+equivalents when available; the guidelines do not require creating those files.
+
+Repositories with substantial documentation may benefit from a small
+documentation index or table of contents. The index should identify the
+authoritative documents and indicate when they are relevant.
+
+For example:
+
+```markdown
+# Documentation Index
+
+- `architecture.md` — system architecture; read before structural changes.
+- `authentication.md` — authentication; read for authentication or
+  authorization changes.
+- `database.md` — persistence; read for schema or database changes.
+- `deployment.md` — production deployment; read for runtime or deployment changes.
+```
+
+This index is optional. Small repositories with only a few documentation files
+usually do not need one.
+
+The index should point to existing canonical documentation rather than duplicate
+its contents. When project behavior changes, agents should update the canonical
+document instead of creating a second description that may later diverge.
+Language translations are supported and should remain synchronized with the
+source document.
 
 ## Deployment
 
@@ -77,11 +116,14 @@ This project is licensed under the MIT License. See [LICENSE](LICENSE).
 
 ## Project Status
 
-Version 1.3.1 is the current release of these guidelines. `AGENTS.md` declares
+Version 1.4.0 is the current release of these guidelines. `AGENTS.md` declares
 this version at the top of the file so users can quickly identify which release
-they are using. Version 1.3.0 added Markdown guidance, version 1.2.0 added
-formatting guidance and the version marker, version 1.1.0 added explicit Perl
-signature guidance, and version 1.0.0 was the first stable release. See
+they are using. Version 1.4.0 added project-context and documentation-lifecycle
+guidance, including consulting relevant documentation before changes,
+preserving canonical documentation, and safer repository synchronization.
+Version 1.3.0 added Markdown guidance, version 1.2.0 added formatting guidance
+and the version marker, version 1.1.0 added explicit Perl signature guidance,
+and version 1.0.0 was the first stable release. See
 [CHANGELOG.md](CHANGELOG.md) for release details.
 
 `AGENTS.md` may continue to evolve to clarify instructions, remove duplication,
