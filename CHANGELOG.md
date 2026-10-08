@@ -7,6 +7,14 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## [Unreleased]
 
+## [1.6.1] - 2026-10-08
+
+### Fixed
+
+- Distinguish dirty working trees from Git status errors when refusing guideline
+  updates, listing blocking paths or the exit code and Git diagnostic, including
+  checks after upstream preparation.
+
 ## [1.6.0] - 2026-10-08
 
 ### Added
@@ -92,7 +100,8 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 - English and French project documentation.
 - MIT license and third-party attribution notices.
 
-[Unreleased]: https://github.com/M-M-M-M/perl-agents-md/compare/v1.6.0...HEAD
+[Unreleased]: https://github.com/M-M-M-M/perl-agents-md/compare/v1.6.1...HEAD
+[1.6.1]: https://github.com/M-M-M-M/perl-agents-md/compare/v1.6.0...v1.6.1
 [1.6.0]: https://github.com/M-M-M-M/perl-agents-md/compare/v1.5.0...v1.6.0
 [1.5.0]: https://github.com/M-M-M-M/perl-agents-md/compare/v1.4.0...v1.5.0
 [1.4.0]: https://github.com/M-M-M-M/perl-agents-md/compare/v1.3.1...v1.4.0

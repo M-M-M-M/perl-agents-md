@@ -8,7 +8,7 @@ La version anglaise est disponible dans [DOCUMENTATION.md](DOCUMENTATION.md).
 
 ## Version
 
-Cette documentation s'applique à la version 1.6.0. Le détail de la version est
+Cette documentation s'applique à la version 1.6.1. Le détail de la version est
 consigné dans [CHANGELOG.md](CHANGELOG.md).
 
 ## Formatage Perl avec perltidy
@@ -149,6 +149,14 @@ propre, fichiers non suivis compris. Il préserve les permissions, remplace
 les fichiers atomiquement et refuse les changements intervenus depuis
 l'analyse. Les dépôts sont traités indépendamment : les mises à jour déjà
 réussies restent appliquées si un autre dépôt échoue.
+
+En cas de refus, `dirty working tree` affiche les chemins bloquants et
+leurs statuts Git : `??` indique un fichier non suivi, la première colonne
+décrit les changements staged et la seconde les changements non staged.
+Une erreur Git affiche séparément `git status failed`, son code de sortie
+et le diagnostic Git. Cette distinction vaut aussi après la préparation
+de l’upstream avec `--commit-push`. Les sauvegardes non suivies ne sont ni
+ignorées ni supprimées automatiquement.
 
 Les commandes proposées permettent de relire le diff, d'ajouter seulement le
 fichier cible, de créer un Conventional Commit limité à ce fichier et de

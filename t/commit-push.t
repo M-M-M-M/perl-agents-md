@@ -161,4 +161,31 @@ chmod oct('0755'), "$repo/.git/hooks/pre-commit" or die 'Cannot enable modifying
 is( $exit,                                                 1,        'unexpected hook changes prevent push' ) ;
 is( git( $remote, 'rev-parse', 'refs/heads/destination' ), $initial, 'unexpected changes are not published' ) ;
 like( $out, qr/unexpected changes/, 'unexpected commit contents are reported' ) ;
+
+for my $case (qw(dirty-after-fetch error-after-fetch)) {
+  ( $repo, $remote ) = fixture($case) ;
+  $initial = git( $repo, 'rev-parse', 'HEAD' ) ;
+  git( $repo, 'update-ref', '-d', 'refs/remotes/origin/destination' ) ;
+  my $action = $case eq 'dirty-after-fetch'
+    ? 'printf backup > AGENTS.md.bak'
+    : 'printf broken > .git/index' ;
+  write_text( "$repo/.git/hooks/reference-transaction", "#!/bin/sh\nif [ \"\$1\" = committed ]; then\n  $action\nfi\n" ) ;
+  chmod oct('0755'), "$repo/.git/hooks/reference-transaction" or die 'Cannot enable fetch fixture hook' ;
+  ( $exit, $out ) = cli($repo) ;
+  is( $exit, 1, "$case prevents application" ) ;
+  like( $out, qr/after upstream preparation/, "$case identifies the preparation phase" ) ;
+
+  if ( $case eq 'dirty-after-fetch' ) {
+    like( $out, qr/dirty working tree.*\n\s+\?\? AGENTS.md.bak/, 'post-fetch dirty report lists blocking backup' ) ;
+  } else {
+    like( $out, qr/git status failed \(exit 128\)/, 'post-fetch Git failure is distinguished' ) ;
+    like( $out, qr/fatal:/,                         'post-fetch Git diagnostic is included' ) ;
+  }
+  open my $file, '<:encoding(UTF-8)', "$repo/AGENTS.md" or die 'Cannot read target fixture' ;
+  my $contents = do { local $/ ; <$file>  } ;
+  close $file or die 'Cannot close target fixture' ;
+  is( $contents, $old, "$case leaves target intact" ) ;
+  is( git( $repo,   'rev-parse', 'HEAD' ),                   $initial, "$case creates no commit" ) ;
+  is( git( $remote, 'rev-parse', 'refs/heads/destination' ), $initial, "$case creates no push" ) ;
+}
 done_testing ;

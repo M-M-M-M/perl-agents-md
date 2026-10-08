@@ -1,4 +1,4 @@
-AGENTS.md version: 1.6.0
+AGENTS.md version: 1.6.1
 
 # Tools
 

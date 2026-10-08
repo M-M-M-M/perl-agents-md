@@ -8,7 +8,7 @@ The French version is available in [DOCUMENTATION.fr.md](DOCUMENTATION.fr.md).
 
 ## Version
 
-This documentation applies to version 1.6.0. Release details are recorded in
+This documentation applies to version 1.6.1. Release details are recorded in
 [CHANGELOG.md](CHANGELOG.md).
 
 ## Perl Formatting With perltidy
@@ -142,6 +142,13 @@ in the cleanliness check. It preserves file permissions, replaces files
 atomically, and rejects changes made since analysis. Each repository is
 handled independently; successful earlier updates remain applied if another
 repository fails.
+
+When application is refused, `dirty working tree` lists the blocking paths
+with Git status codes: `??` means untracked, the first column describes
+staged changes, and the second describes unstaged changes. A Git command
+failure instead reports `git status failed`, its exit code, and the Git
+diagnostic. The same distinction applies after upstream preparation with
+`--commit-push`. Untracked backups are not ignored or deleted automatically.
 
 Suggested commands include diff review, staging only the target file, a
 Conventional Commit limited to that file, and pushing the current branch to

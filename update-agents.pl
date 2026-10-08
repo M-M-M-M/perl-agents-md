@@ -45,18 +45,14 @@ for my $input (@ARGV) {
   next if $result->{status} eq 'unchanged' ;
 
   if ($apply) {
-    my ( $status_code, $status, $status_error ) = run_git( $root, 'status', '--porcelain', '--untracked-files=normal' ) ;
-    if ( $status_code || length $status ) {
-      print "  Not applied: dirty working tree or status error $status_error\n" ;
+    if ( !check_clean_worktree($root) ) {
       $failed = 1 ;
       next ;
     }
     my $destination ;
     if ($commit_push) {
       eval { $destination = prepare_publish($root) ; 1  } or do { print "  Not applied: $@" ; $failed = 1 ; next  } ;
-      my ( $check_code, $check_status, $check_error ) = run_git( $root, 'status', '--porcelain', '--untracked-files=normal' ) ;
-      if ( $check_code || length $check_status ) {
-        print "  Not applied: working tree changed during preparation $check_error\n" ;
+      if ( !check_clean_worktree( $root, ' after upstream preparation' ) ) {
         $failed = 1 ; next ;
       }
     }
@@ -79,6 +75,22 @@ for my $input (@ARGV) {
   suggest_commands( $root, $path, $result->{version} ) ;
 }
 exit $failed ;
+
+sub check_clean_worktree ( $root, $phase = '' ) {
+  my ( $code, $status, $error ) = run_git( $root, 'status', '--porcelain=v1', '--untracked-files=normal' ) ;
+  if ($code) {
+    print "  Not applied: git status failed (exit $code)$phase\n" ;
+    my $diagnostic = length( $error . $status ) ? $error . $status : 'Git returned no diagnostic' ;
+    print "    $_\n" for split /\n/, $diagnostic ;
+    return 0 ;
+  }
+  if ( length $status ) {
+    print "  Not applied: dirty working tree$phase\n" ;
+    print "    $_\n" for split /\n/, $status ;
+    return 0 ;
+  }
+  return 1 ;
+}
 
 sub canonical_path ($path) {
   my $absolute = abs_path($path) ;

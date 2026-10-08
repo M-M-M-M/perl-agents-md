@@ -136,7 +136,7 @@ This project is licensed under the MIT License. See [LICENSE](LICENSE).
 
 ## Project Status
 
-Version 1.6.0 is the current release of these guidelines. `AGENTS.md`
+Version 1.6.1 is the current release of these guidelines. `AGENTS.md`
 declares this version at the top of the file so users can quickly identify
 which release they are using. Version 1.6.0 added the guideline update
 helper, including optional automatic commits and pushes while preserving

@@ -147,7 +147,7 @@ Ce projet est distribué sous licence MIT. Voir [LICENSE](LICENSE).
 
 ## État du projet
 
-La version 1.6.0 est la version courante de ces consignes. `AGENTS.md`
+La version 1.6.1 est la version courante de ces consignes. `AGENTS.md`
 déclare cette version en tête de fichier afin d'identifier rapidement la
 version utilisée. La version 1.6.0 a ajouté le helper de mise à jour des
 consignes, avec commit et push automatiques en option, en préservant les
