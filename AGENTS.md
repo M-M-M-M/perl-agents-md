@@ -1,4 +1,4 @@
-AGENTS.md version: 1.4.0
+AGENTS.md version: 1.5.0
 
 # Tools
 
@@ -138,6 +138,25 @@ Do not test private implementation details.
 Do not test accessors unless they encode behavior.
 Do not assert exact error messages unless the message is part of the public contract.
 Run test coverage.
+
+# Browser Testing
+
+Use browser-based testing when relevant to the changes being made.
+Prefer Playwright for automated browser tests when available.
+Prefer running Playwright in Docker rather than directly on the host, when Docker is available and suitable for the test.
+Reuse existing Playwright Docker images when possible, ensuring compatibility between Playwright and browser versions.
+Use isolated, ephemeral containers for Docker-based browser tests.
+Do not mount sensitive host directories or the Docker socket into browser-testing containers.
+Fall back to existing local browser installations or testing tools if Docker is unavailable or unsuitable.
+Use isolated browser profiles without personal sessions or credentials.
+Use dedicated test credentials when authenticated testing is required.
+Prefer local or test environments over production.
+Do not perform destructive or state-changing actions on production systems without explicit approval.
+Do not install browser automation dependencies, pull new Docker images, or modify the system environment solely for testing without explicit approval.
+If browser execution is blocked by sandbox restrictions, explain the limitation before requesting narrowly scoped elevated permissions.
+Never disable sandbox protections globally to enable browser testing.
+If browser testing cannot be performed, report the limitation and any tests that were skipped.
+Never claim that a browser test passed unless it was actually executed.
 
 # Markdown
 

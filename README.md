@@ -116,9 +116,11 @@ This project is licensed under the MIT License. See [LICENSE](LICENSE).
 
 ## Project Status
 
-Version 1.4.0 is the current release of these guidelines. `AGENTS.md` declares
+Version 1.5.0 is the current release of these guidelines. `AGENTS.md` declares
 this version at the top of the file so users can quickly identify which release
-they are using. Version 1.4.0 added project-context and documentation-lifecycle
+they are using. Version 1.5.0 added browser-testing guidance covering Playwright,
+Docker, isolated environments, approval requirements, and accurate test reporting.
+Version 1.4.0 added project-context and documentation-lifecycle
 guidance, including consulting relevant documentation before changes,
 preserving canonical documentation, and safer repository synchronization.
 Version 1.3.0 added Markdown guidance, version 1.2.0 added formatting guidance

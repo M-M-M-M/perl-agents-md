@@ -7,6 +7,18 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## [Unreleased]
 
+## [1.5.0] - 2026-10-08
+
+### Added
+
+- Browser-testing guidance covering Playwright, Docker, isolated environments,
+  dedicated credentials, production safeguards, approval requirements, and
+  accurate reporting of executed and skipped tests.
+
+### Changed
+
+- Updated version markers and English and French documentation for version 1.5.0.
+
 ## [1.4.0] - 2026-10-05
 
 ### Added
@@ -68,7 +80,8 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 - English and French project documentation.
 - MIT license and third-party attribution notices.
 
-[Unreleased]: https://github.com/M-M-M-M/perl-agents-md/compare/v1.4.0...HEAD
+[Unreleased]: https://github.com/M-M-M-M/perl-agents-md/compare/v1.5.0...HEAD
+[1.5.0]: https://github.com/M-M-M-M/perl-agents-md/compare/v1.4.0...v1.5.0
 [1.4.0]: https://github.com/M-M-M-M/perl-agents-md/compare/v1.3.1...v1.4.0
 [1.3.1]: https://github.com/M-M-M-M/perl-agents-md/compare/v1.3.0...v1.3.1
 [1.3.0]: https://github.com/M-M-M-M/perl-agents-md/compare/v1.2.0...v1.3.0

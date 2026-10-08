@@ -125,17 +125,18 @@ Ce projet est distribué sous licence MIT. Voir [LICENSE](LICENSE).
 
 ## État du projet
 
-La version 1.4.0 est la version courante de ces consignes. `AGENTS.md` déclare
+La version 1.5.0 est la version courante de ces consignes. `AGENTS.md` déclare
 cette version en tête de fichier afin d'identifier rapidement la version
-utilisée. La version 1.4.0 a ajouté les consignes sur le contexte du projet et
-la maintenance de la documentation : consulter les documents pertinents avant
-les modifications, préserver les documents de référence et synchroniser le
-dépôt de manière plus prudente. La version 1.3.0 a ajouté les consignes Markdown,
-la version 1.2.0 a ajouté les consignes de formatage et le marqueur de version,
-la version 1.1.0 a
-ajouté les consignes explicites sur les signatures Perl, et la version 1.0.0
-était la première version stable. Voir [CHANGELOG.md](CHANGELOG.md) pour le
-détail des versions.
+utilisée. La version 1.5.0 a ajouté les consignes de tests dans le navigateur
+: Playwright, Docker, environnements isolés, autorisations requises et compte
+rendu fidèle des tests exécutés. La version 1.4.0 a ajouté les consignes sur
+le contexte du projet et la maintenance de la documentation : consulter les
+documents pertinents avant les modifications, préserver les documents de
+référence et synchroniser le dépôt de manière plus prudente. La version 1.3.0
+a ajouté les consignes Markdown, la version 1.2.0 a ajouté les consignes de
+formatage et le marqueur de version, la version 1.1.0 a ajouté les consignes
+explicites sur les signatures Perl, et la version 1.0.0 était la première
+version stable. Voir [CHANGELOG.md](CHANGELOG.md) pour le détail des versions.
 
 Le fichier `AGENTS.md` pourra continuer à évoluer pour clarifier les consignes,
 supprimer les doublons, séparer les règles générales des règles propres à un
