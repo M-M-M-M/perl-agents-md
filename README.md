@@ -106,6 +106,10 @@ Git commands.
 See [DOCUMENTATION.md](DOCUMENTATION.md#updating-existing-agentsmd-files) for options,
 conflict handling, and validation commands.
 
+Output is grouped into labeled repository blocks, followed by a table of
+actual outcomes and warnings. Dirty-worktree reports suggest a manual
+stash, update, and restore sequence.
+
 The helper updates only `AGENTS.md`. It neither copies nor modifies
 `.perltidyrc`, including with `--apply` or `--commit-push`, preserving each
 project's formatting style.
@@ -136,7 +140,7 @@ This project is licensed under the MIT License. See [LICENSE](LICENSE).
 
 ## Project Status
 
-Version 1.6.1 is the current release of these guidelines. `AGENTS.md`
+Version 1.7.0 is the current release of these guidelines. `AGENTS.md`
 declares this version at the top of the file so users can quickly identify
 which release they are using. Version 1.6.0 added the guideline update
 helper, including optional automatic commits and pushes while preserving

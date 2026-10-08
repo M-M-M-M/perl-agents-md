@@ -116,6 +116,10 @@ commandes Git. Voir
 [DOCUMENTATION.fr.md][mise-a-jour] pour les options, les conflits et les
 commandes de validation.
 
+La sortie est organisée en blocs identifiés par dépôt, suivis d’un tableau
+des actions réellement effectuées et des avertissements. Un arbre non propre
+déclenche une proposition de stash, mise à jour et restauration manuels.
+
 Le helper met à jour uniquement `AGENTS.md`. Il ne copie ni ne modifie
 `.perltidyrc`, y compris avec `--apply` ou `--commit-push`, afin de préserver
 le style de formatage de chaque projet.
@@ -147,7 +151,7 @@ Ce projet est distribué sous licence MIT. Voir [LICENSE](LICENSE).
 
 ## État du projet
 
-La version 1.6.1 est la version courante de ces consignes. `AGENTS.md`
+La version 1.7.0 est la version courante de ces consignes. `AGENTS.md`
 déclare cette version en tête de fichier afin d'identifier rapidement la
 version utilisée. La version 1.6.0 a ajouté le helper de mise à jour des
 consignes, avec commit et push automatiques en option, en préservant les

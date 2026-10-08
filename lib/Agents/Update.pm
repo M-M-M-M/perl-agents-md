@@ -135,7 +135,7 @@ sub analyze_content ( $result, %args ) {
   $result->{status}  = $candidate eq $local ? 'unchanged' : 'update' ;
   write_text( $local_path,  $local ) ;
   write_text( $target_path, $candidate ) ;
-  my ( $diff_code, $diff, $diff_error ) = command( 'git', 'diff', '--no-index', '--no-ext-diff', '--', $local_path, $target_path ) ;
+  my ( $diff_code, $diff, $diff_error ) = command( 'git', 'diff', '--no-color', '--no-index', '--no-ext-diff', '--', $local_path, $target_path ) ;
   die "Cannot compare $path: $diff_error" if $diff_code > 1 ;
   $diff =~ s/\Q$local_path\E/\/AGENTS.md/g ;
   $diff =~ s/\Q$target_path\E/\/AGENTS.md/g ;

@@ -7,6 +7,15 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## [Unreleased]
 
+## [1.7.0] - 2026-10-08
+
+### Added
+
+- Suggested manual stash, update, and restore commands for dirty working trees,
+  preserving the requested publication mode and target version.
+- Labeled output blocks per repository and a final table identifying actual
+  update and publication outcomes, warnings, and blocking diagnostics.
+
 ## [1.6.1] - 2026-10-08
 
 ### Fixed
@@ -100,7 +109,8 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 - English and French project documentation.
 - MIT license and third-party attribution notices.
 
-[Unreleased]: https://github.com/M-M-M-M/perl-agents-md/compare/v1.6.1...HEAD
+[Unreleased]: https://github.com/M-M-M-M/perl-agents-md/compare/v1.7.0...HEAD
+[1.7.0]: https://github.com/M-M-M-M/perl-agents-md/compare/v1.6.1...v1.7.0
 [1.6.1]: https://github.com/M-M-M-M/perl-agents-md/compare/v1.6.0...v1.6.1
 [1.6.0]: https://github.com/M-M-M-M/perl-agents-md/compare/v1.5.0...v1.6.0
 [1.5.0]: https://github.com/M-M-M-M/perl-agents-md/compare/v1.4.0...v1.5.0

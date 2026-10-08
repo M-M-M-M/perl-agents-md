@@ -8,7 +8,7 @@ La version anglaise est disponible dans [DOCUMENTATION.md](DOCUMENTATION.md).
 
 ## Version
 
-Cette documentation s'applique à la version 1.6.1. Le détail de la version est
+Cette documentation s'applique à la version 1.7.0. Le détail de la version est
 consigné dans [CHANGELOG.md](CHANGELOG.md).
 
 ## Formatage Perl avec perltidy
@@ -150,6 +150,22 @@ les fichiers atomiquement et refuse les changements intervenus depuis
 l'analyse. Les dépôts sont traités indépendamment : les mises à jour déjà
 réussies restent appliquées si un autre dépôt échoue.
 
+Chaque cible traitée possède un bloc en texte simple avec le nom du dépôt
+et le chemin complet de la cible. Les événements portent les libellés
+`[UPDATE]`, `[WARNING]`, `[ERROR]`, `[REVIEW]`, `[OK]` ou `[SKIP]`. Les diffs,
+diagnostics et commandes proposées restent dans le bloc de leur dépôt.
+Aucune couleur ANSI n’est émise, même lors d’une redirection de la sortie.
+
+Un tableau final indique `Repository / target`, `Outcome` et `Details` pour
+chaque cible traitée. Il distingue les mises à jour proposées, appliquées
+et publiées des fichiers inchangés ou exclus, vérifications manuelles,
+applications bloquées, erreurs Git, commits échoués et commits locaux
+conservés après un échec de push. Les avertissements restent visibles à
+côté des résultats réussis. Les détails résument le diagnostic principal ;
+les diagnostics complets restent dans les blocs précédents. Le traitement
+des doublons est conservé et les avertissements seuls ne changent pas le
+code de sortie d’un rapport réussi.
+
 En cas de refus, `dirty working tree` affiche les chemins bloquants et
 leurs statuts Git : `??` indique un fichier non suivi, la première colonne
 décrit les changements staged et la seconde les changements non staged.
@@ -157,6 +173,22 @@ Une erreur Git affiche séparément `git status failed`, son code de sortie
 et le diagnostic Git. Cette distinction vaut aussi après la préparation
 de l’upstream avec `--commit-push`. Les sauvegardes non suivies ne sont ni
 ignorées ni supprimées automatiquement.
+
+Pour un arbre non propre, le helper propose un stash temporaire, une mise
+à jour limitée à la cible bloquée, puis la restauration du stash :
+
+```bash
+git -C ../projet stash push -u -m "Temporary stash before AGENTS.md update"
+./update-agents.pl --apply ../projet/AGENTS.md
+git -C ../projet stash pop
+```
+
+Ces commandes sont uniquement affichées, avec des chemins absolus échappés
+et les options initiales `--commit-push` et `--to` lorsqu’elles sont présentes.
+Aucun stash ni relancement n’est exécuté automatiquement. La restauration du
+stash peut nécessiter une résolution manuelle des conflits. Cette suggestion
+apparaît aux deux contrôles d’arbre non propre, mais pas pour une erreur de
+statut Git ; le résultat reste bloqué avec un code de sortie non nul.
 
 Les commandes proposées permettent de relire le diff, d'ajouter seulement le
 fichier cible, de créer un Conventional Commit limité à ce fichier et de

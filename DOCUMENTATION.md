@@ -8,7 +8,7 @@ The French version is available in [DOCUMENTATION.fr.md](DOCUMENTATION.fr.md).
 
 ## Version
 
-This documentation applies to version 1.6.1. Release details are recorded in
+This documentation applies to version 1.7.0. Release details are recorded in
 [CHANGELOG.md](CHANGELOG.md).
 
 ## Perl Formatting With perltidy
@@ -143,12 +143,42 @@ atomically, and rejects changes made since analysis. Each repository is
 handled independently; successful earlier updates remain applied if another
 repository fails.
 
+Every processed target has a separate plain-text block with the repository
+name and complete target path. Events use `[UPDATE]`, `[WARNING]`, `[ERROR]`,
+`[REVIEW]`, `[OK]`, or `[SKIP]` labels. Diffs, diagnostics, and suggested
+commands remain inside their repository block. No ANSI colors are emitted,
+including when output is redirected.
+
+A final table lists `Repository / target`, `Outcome`, and `Details` for each
+processed target. It distinguishes proposed, applied, and published updates
+from unchanged or excluded files, manual review, blocked application, Git
+errors, failed commits, and local commits retained after failed pushes.
+Warnings remain visible alongside successful results. Details summarize
+the main diagnostic; complete diagnostics remain in the blocks above.
+Duplicate targets retain their existing handling and successful reports
+with warnings do not change the exit code.
+
 When application is refused, `dirty working tree` lists the blocking paths
 with Git status codes: `??` means untracked, the first column describes
 staged changes, and the second describes unstaged changes. A Git command
 failure instead reports `git status failed`, its exit code, and the Git
 diagnostic. The same distinction applies after upstream preparation with
 `--commit-push`. Untracked backups are not ignored or deleted automatically.
+
+For a dirty working tree, the helper suggests a temporary stash, an update
+limited to the blocked target, and restoration of the stash:
+
+```bash
+git -C ../project stash push -u -m "Temporary stash before AGENTS.md update"
+./update-agents.pl --apply ../project/AGENTS.md
+git -C ../project stash pop
+```
+
+These commands are displayed only, with quoted absolute paths and the
+original `--commit-push` and `--to` options when present. No stash or rerun
+is executed automatically. Restoring the stash may require manual conflict
+resolution. The suggestion appears at both dirty-worktree checks, but not
+for a Git status error; the result remains blocked with a nonzero exit code.
 
 Suggested commands include diff review, staging only the target file, a
 Conventional Commit limited to that file, and pushing the current branch to

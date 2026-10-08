@@ -81,6 +81,7 @@ my $published = git( $repo, 'rev-parse', 'HEAD' ) ;
 isnt( $published, $initial, 'update has a new commit' ) ;
 is( git( $remote, 'rev-parse', 'refs/heads/destination' ), $published, 'configured upstream receives commit' ) ;
 like( $out, qr/Published.*refs\/heads\/destination/, 'result reports destination' ) ;
+like( $out, qr/\Q$repo\E\s*\|\s*Published\s*\|/,     'summary records successful publication' ) ;
 ( $exit, $out ) = cli($repo) ;
 is( $exit,                             0,          'already current file is successful' ) ;
 is( git( $repo, 'rev-parse', 'HEAD' ), $published, 'already current file creates no commit' ) ;
@@ -118,7 +119,9 @@ for my $case (qw(no-upstream detached fetch-failure ahead behind diverged)) {
 ( $repo, $remote ) = fixture('dirty') ;
 write_text( "$repo/other.txt", 'local change' ) ;
 ( $exit, $out ) = cli($repo) ;
-is( $exit,                                   1,  'dirty repository is skipped' ) ;
+is( $exit, 1, 'dirty repository is skipped' ) ;
+like( $out, qr/update-agents\.pl' --commit-push --to '1\.5\.0'/, 'stash recovery preserves publication mode and explicit version' ) ;
+is( git( $repo, 'stash', 'list' ), '', 'publication refusal does not create a stash' ) ;
 is( git( $repo, 'diff', '--', 'AGENTS.md' ), '', 'dirty rejection leaves target untouched' ) ;
 
 ( $repo, $remote ) = fixture('conflict') ;
@@ -138,6 +141,7 @@ write_text( "$repo/.git/hooks/pre-commit", "#!/bin/sh\nexit 1\n" ) ;
 chmod oct('0755'), "$repo/.git/hooks/pre-commit" or die 'Cannot enable commit hook' ;
 ( $exit, $out ) = cli($repo) ;
 is( $exit, 1, 'commit hook failure is reported' ) ;
+like( $out, qr/\Q$repo\E\s*\|\s*Applied, commit failed\s*\|/, 'summary records applied file with failed commit' ) ;
 is( git( $repo,   'rev-parse', 'HEAD' ),                   $initial, 'failed commit leaves HEAD intact' ) ;
 is( git( $remote, 'rev-parse', 'refs/heads/destination' ), $initial, 'failed commit is not pushed' ) ;
 like( git( $repo, 'diff', '--', 'AGENTS.md' ), qr/1.5.0/, 'failed commit preserves update for review' ) ;
@@ -149,6 +153,8 @@ chmod oct('0755'), "$remote/hooks/pre-receive" or die 'Cannot enable push hook' 
 my ($second) = fixture('continued') ;
 ( $exit, $out ) = cli( $repo, $second ) ;
 is( $exit, 1, 'push failure yields nonzero combined exit' ) ;
+like( $out, qr/\Q$repo\E\s*\|\s*Local commit, push failed\s*\|/, 'summary records retained commit after push failure' ) ;
+like( $out, qr/\Q$second\E\s*\|\s*Published\s*\|/,               'summary records later successful repository independently' ) ;
 isnt( git( $repo, 'rev-parse', 'HEAD' ), $initial, 'failed push preserves local commit' ) ;
 is( git( $remote, 'rev-parse', 'refs/heads/destination' ), $initial, 'rejected remote remains intact' ) ;
 like( $out, qr/Retry.*push/s, 'push failure prints retry command' ) ;
@@ -176,10 +182,13 @@ for my $case (qw(dirty-after-fetch error-after-fetch)) {
   like( $out, qr/after upstream preparation/, "$case identifies the preparation phase" ) ;
 
   if ( $case eq 'dirty-after-fetch' ) {
-    like( $out, qr/dirty working tree.*\n\s+\?\? AGENTS.md.bak/, 'post-fetch dirty report lists blocking backup' ) ;
+    like( $out, qr/dirty working tree.*\n\s+\?\? AGENTS.md.bak/,                        'post-fetch dirty report lists blocking backup' ) ;
+    like( $out, qr/stash push -u.*\n.*update-agents\.pl.*--commit-push.*\n.*stash pop/, 'post-fetch dirty refusal includes stash sequence' ) ;
+    is( git( $repo, 'stash', 'list' ), '', 'post-fetch refusal does not create a stash' ) ;
   } else {
     like( $out, qr/git status failed \(exit 128\)/, 'post-fetch Git failure is distinguished' ) ;
     like( $out, qr/fatal:/,                         'post-fetch Git diagnostic is included' ) ;
+    unlike( $out, qr/stash push|stash pop/, 'post-fetch Git error has no stash suggestion' ) ;
   }
   open my $file, '<:encoding(UTF-8)', "$repo/AGENTS.md" or die 'Cannot read target fixture' ;
   my $contents = do { local $/ ; <$file>  } ;
