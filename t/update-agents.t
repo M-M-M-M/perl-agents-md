@@ -1,0 +1,189 @@
+use strict ;
+use warnings ;
+use utf8 ;
+use Encode qw(encode) ;
+use Test::More ;
+use File::Temp qw(tempdir) ;
+use File::Path qw(make_path) ;
+use IPC::Open3 ;
+use Symbol qw(gensym) ;
+use lib 'lib' ;
+use Agents::Update qw(analyze update_file) ;
+
+my $root   = tempdir( CLEANUP => 1 ) ;
+my $source = "$root/source" ;
+make_path($source) ;
+
+sub git {
+  my (@args) = @_ ;
+  system( 'git', '-C', $source, @args ) == 0 or die "Git fixture failed" ;
+}
+
+sub write_text {
+  my ( $path, $text ) = @_ ;
+  open my $fh, '>:encoding(UTF-8)', $path or die "Cannot write $path: $!" ;
+  print {$fh} $text or die "Cannot write $path: $!" ;
+  close $fh         or die "Cannot close $path: $!" ;
+}
+my $base = "AGENTS.md version: 1.0.0\n\n# Tools\n\nUse old tool\nStable rule one\nStable rule two\nStable rule three\nKeep this rule\n\n# Perl\n\nOriginal Perl rule\nStable ending one\nStable ending two\nStable ending three\n" ;
+my $target = $base ;
+$target =~ s/1\.0\.0/1.1.0/ ;
+$target =~ s/old tool/new tool/ ;
+$target =~ s/Original Perl rule/Updated Perl rule/ ;
+git( 'init',   '-q' ) ;
+git( 'config', 'user.email', 'test@example.invalid' ) ;
+git( 'config', 'user.name',  'Test' ) ;
+write_text( "$source/AGENTS.md", $base ) ;
+git( 'add',    'AGENTS.md' ) ;
+git( 'commit', '-qm', 'base' ) ;
+git( 'tag',    'v1.0.0' ) ;
+write_text( "$source/AGENTS.md", $target ) ;
+git( 'commit', '-qam', 'target' ) ;
+git( 'tag', 'v1.1.0' ) ;
+
+sub inspect {
+  my ($text) = @_ ;
+  write_text( "$root/AGENTS.md", $text ) ;
+  return analyze( source => $source, path => "$root/AGENTS.md" ) ;
+}
+is( inspect($base)->{content},  $target,     'exact old copy becomes target' ) ;
+is( inspect($target)->{status}, 'unchanged', 'current copy needs no write' ) ;
+my $custom = $base . "\n# Project\n\nLocal addition\n" ;
+like( inspect($custom)->{content}, qr/Local addition/, 'project addition survives' ) ;
+$custom = $base ;
+$custom =~ s/Keep this rule/Project replacement/ ;
+like( inspect($custom)->{content}, qr/Project replacement/, 'local replacement survives' ) ;
+$custom = $base ;
+$custom =~ s/Keep this rule\n// ;
+unlike( inspect($custom)->{content}, qr/Keep this rule/, 'local deletion survives' ) ;
+$custom = $base ;
+$custom =~ s/\n# Perl\n.*//s ;
+my $omitted = inspect($custom) ;
+unlike( $omitted->{content}, qr/# Perl/, 'omitted section stays absent despite upstream edits' ) ;
+like( join( ' ', @{ $omitted->{notes} } ), qr/Perl/, 'ignored section change is reported' ) ;
+$custom = $base ;
+$custom =~ s/old tool/project tool/ ;
+my $conflict = inspect($custom) ;
+is( $conflict->{status}, 'manual', 'competing edits need manual review' ) ;
+like( $conflict->{diff}, qr/<<<<<<<|project tool/, 'conflict report identifies affected text' ) ;
+is( inspect('Unrelated instructions')->{status},     'manual', 'unidentified file is skipped' ) ;
+is( inspect("AGENTS.md version: 0.8.0\n")->{status}, 'manual', 'unknown version is skipped' ) ;
+is( inspect("AGENTS.md version: 9.0.0\n")->{status}, 'manual', 'newer version is skipped' ) ;
+inspect($base) ;
+my $proposal = analyze( source => $source, path => "$root/AGENTS.md" ) ;
+write_text( "$root/AGENTS.md", $custom ) ;
+eval { update_file($proposal)  } ;
+like( $@, qr/changed/, 'concurrent edits prevent replacement' ) ;
+inspect($base) ;
+$proposal = analyze( source => $source, path => "$root/AGENTS.md" ) ;
+chmod oct('0640'), "$root/AGENTS.md" or die "Cannot chmod fixture: $!" ;
+update_file($proposal) ;
+is( ( stat("$root/AGENTS.md") )[2] & oct('0777'),                      oct('0640'), 'permissions preserved' ) ;
+is( analyze( source => $source, path => "$root/AGENTS.md" )->{status}, 'unchanged', 'applied content is current' ) ;
+symlink "$root/AGENTS.md", "$root/link" or die "Cannot create symlink: $!" ;
+is( analyze( source => $source, path => "$root/link" )->{status},    'manual', 'symlinks refused' ) ;
+is( analyze( source => $source, path => "$root/missing" )->{status}, 'manual', 'unreadable file is reported' ) ;
+is( analyze( source => $source, path => "$root/AGENTS.md", to => '8.0.0' )->{status}, 'manual', 'invalid target is reported' ) ;
+inspect($base) ;
+$proposal = analyze( source => $source, path => "$root/AGENTS.md" ) ;
+unlink "$root/AGENTS.md" or die "Cannot remove fixture: $!" ;
+eval { update_file($proposal)  } ;
+like( $@, qr/Cannot read/, 'missing destination prevents writing' ) ;
+eval { update_file($conflict)  } ;
+like( $@, qr/No automatic/, 'conflicting proposal cannot be installed' ) ;
+
+my $next = $target ;
+$next =~ s/1\.1\.0/1.2.0/ ;
+$next =~ s/Stable rule one\n// ;
+$next =~ s/# Tools/# Browser Testing\n\nNew upstream section\n\n# Tools/ ;
+write_text( "$source/AGENTS.md", $next ) ;
+git( 'commit', '-qam', 'next target' ) ;
+git( 'tag', 'v1.2.0' ) ;
+my $next_result = inspect( $target . "\n# Project\n\nCustom\n" ) ;
+unlike( $next_result->{content}, qr/Stable rule one/, 'upstream deletion applies to customized file' ) ;
+like( $next_result->{content}, qr/New upstream section/, 'new upstream section is added' ) ;
+is( analyze( source => $source, path => "$root/AGENTS.md", to => '1.1.0' )->{status}, 'unchanged', 'explicit target selection is honored' ) ;
+write_text( "$root/AGENTS.md", $next ) ;
+like( analyze( source => $source, path => "$root/AGENTS.md", to => '1.1.0' )->{reason}, qr/newer/, 'known newer version is not downgraded' ) ;
+
+my $consumer = "$root/consumer with spaces" ;
+make_path($consumer) ;
+for my $args ( [ 'init', '-q' ], [ 'config', 'user.email', 'test@example.invalid' ], [ 'config', 'user.name', 'Test' ] ) {
+  system( 'git', '-C', $consumer, @{$args} ) == 0 or die "Consumer fixture failed" ;
+}
+my ( undef, $released ) = Agents::Update::run_git( '.', 'show', 'v1.4.0:AGENTS.md' ) ;
+write_text( "$consumer/AGENTS.md", $released ) ;
+system( 'git', '-C', $consumer, 'add', 'AGENTS.md' ) == 0 or die 'Cannot stage fixture' ;
+system( 'git', '-C', $consumer, 'commit', '-qm', 'base' ) == 0 or die 'Cannot commit fixture' ;
+
+sub cli {
+  my (@args) = @_ ;
+  local $SIG{ALRM} = sub { die 'CLI test timed out'  } ;
+  alarm 15 ;
+  my $error = gensym ;
+  my $pid   = open3( my $input, my $output, $error, $^X, 'update-agents.pl', map { encode( 'UTF-8', $_ ) } @args ) ;
+  close $input or die 'Cannot close input' ;
+  local $/ ;
+  my $out = <$output> // '' ;
+  my $err = <$error>  // '' ;
+  close $output or die 'Cannot close output' ;
+  close $error  or die 'Cannot close error' ;
+  waitpid( $pid, 0 ) ;
+  alarm 0 ;
+  return ( $? >> 8, $out, $err ) ;
+}
+my ( $exit, $out ) = cli($consumer) ;
+is( $exit, 0, 'report accepts repository paths containing spaces' ) ;
+like( $out, qr/commit --only/,       'commit suggestion includes only target file' ) ;
+like( $out, qr/configured upstream/, 'missing upstream is explained' ) ;
+my ( undef, $git_diff ) = Agents::Update::run_git( $consumer, 'diff' ) ;
+is( $git_diff, '', 'report leaves repository untouched' ) ;
+write_text( "$consumer/unrelated", 'dirty' ) ;
+( $exit, $out ) = cli( '--apply', $consumer ) ;
+is( $exit, 1, 'dirty repository causes nonzero exit' ) ;
+like( $out, qr/Not applied: dirty/, 'dirty repository is skipped' ) ;
+( undef, $git_diff ) = Agents::Update::run_git( $consumer, 'diff' ) ;
+is( $git_diff, '', 'dirty repository target remains untouched' ) ;
+unlink "$consumer/unrelated" or die 'Cannot remove dirty fixture' ;
+( $exit, $out ) = cli( '--apply', $consumer ) ;
+is( $exit, 0, 'clean repository can be updated' ) ;
+like( $out, qr/Applied v[0-9.]+/, 'successful application is reported' ) ;
+my ( undef, $count ) = Agents::Update::run_git( $consumer, 'rev-list', '--count', 'HEAD' ) ;
+is( $count, "1\n", 'application creates no commit' ) ;
+( $exit, $out ) = cli( '.', "$root/missing" ) ;
+is( $exit, 1, 'missing path causes nonzero exit' ) ;
+like( $out, qr/source repository/, 'source repository is excluded' ) ;
+( $exit, $out ) = cli('--help') ;
+is( $exit, 0, 'help succeeds' ) ;
+( $exit, $out ) = cli() ;
+is( $exit, 2, 'missing arguments produce usage error' ) ;
+( $exit, $out ) = cli('--invalid-option') ;
+is( $exit, 2, 'invalid option is rejected' ) ;
+my $latest = analyze( source => '.', path => "$consumer/AGENTS.md" )->{version} ;
+( $exit, $out ) = cli( '--to', $latest, $consumer, $consumer ) ;
+is( $exit,                                 0, 'explicit CLI target works and duplicate paths are accepted' ) ;
+is( scalar( () = $out =~ /: unchanged/g ), 1, 'duplicate path is processed only once' ) ;
+( $exit, $out ) = cli("$root/link") ;
+is( $exit, 1, 'CLI refuses symlink target' ) ;
+write_text( "$root/AGENTS.md", $base ) ;
+( $exit, $out ) = cli("$root/AGENTS.md") ;
+is( $exit, 1, 'CLI refuses files outside Git repositories' ) ;
+write_text( "$consumer/AGENTS.md", 'Project instructions without a version' ) ;
+( $exit, $out ) = cli( '--apply', $consumer ) ;
+is( $exit, 1, 'CLI reports unidentified content without application' ) ;
+like( $out, qr/No identifiable version/, 'manual report gives reason' ) ;
+write_text( "$consumer/AGENTS.md", $released ) ;
+my ( undef, $branch ) = Agents::Update::run_git( $consumer, 'symbolic-ref', '--short', 'HEAD' ) ;
+chomp $branch ;
+
+for my $args ( [ 'remote', 'add', 'origin', "$root/no-network" ], [ 'config', "branch.$branch.remote", 'origin' ], [ 'config', "branch.$branch.merge", 'refs/heads/main' ], [ 'update-ref', 'refs/remotes/origin/main', 'HEAD' ] ) {
+  system( 'git', '-C', $consumer, @{$args} ) == 0 or die 'Cannot configure fixture upstream' ;
+}
+( $exit, $out ) = cli($consumer) ;
+like( $out, qr/push 'origin' 'HEAD:refs\/heads\/main'/, 'push suggestion targets the configured upstream' ) ;
+my $unicode_consumer = "$root/projet-équipe's" ;
+rename( $consumer, $unicode_consumer ) or die "Cannot rename Unicode fixture: $!" ;
+( $exit, $out ) = cli($unicode_consumer) ;
+is( $exit, 0, 'UTF-8 repository paths are accepted' ) ;
+like( $out, qr/'"'"'/, 'apostrophes are escaped in suggested commands' ) ;
+done_testing ;

@@ -98,6 +98,28 @@ commandes de test, les outils de dépendances, les modules préférés ou les r�
 de workflow. Garder `.perltidyrc` inchangé pour conserver le style de formatage
 fourni par ce projet.
 
+## Mise à jour des consignes existantes
+
+Utiliser le helper pour prévisualiser les mises à jour des dépôts qui utilisent
+ces consignes :
+
+```bash
+./update-agents.pl ../*/AGENTS.md
+```
+
+Le rapport compare chaque fichier aux versions publiées et préserve les
+ajouts, modifications et suppressions propres au projet. Utiliser `--apply`
+pour mettre à jour les dépôts compatibles dont l'arbre de travail est
+propre. Avec `--commit-push`, il applique, commite et pousse automatiquement
+si la branche correspond à son upstream. Sans cette option, il propose les
+commandes Git. Voir
+[DOCUMENTATION.fr.md][mise-a-jour] pour les options, les conflits et les
+commandes de validation.
+
+Le helper met à jour uniquement `AGENTS.md`. Il ne copie ni ne modifie
+`.perltidyrc`, y compris avec `--apply` ou `--commit-push`, afin de préserver
+le style de formatage de chaque projet.
+
 ## Formatage Perl
 
 Le dépôt contient une configuration perltidy de référence dans
@@ -125,19 +147,25 @@ Ce projet est distribué sous licence MIT. Voir [LICENSE](LICENSE).
 
 ## État du projet
 
-La version 1.5.0 est la version courante de ces consignes. `AGENTS.md` déclare
-cette version en tête de fichier afin d'identifier rapidement la version
-utilisée. La version 1.5.0 a ajouté les consignes de tests dans le navigateur
-: Playwright, Docker, environnements isolés, autorisations requises et compte
-rendu fidèle des tests exécutés. La version 1.4.0 a ajouté les consignes sur
-le contexte du projet et la maintenance de la documentation : consulter les
-documents pertinents avant les modifications, préserver les documents de
-référence et synchroniser le dépôt de manière plus prudente. La version 1.3.0
-a ajouté les consignes Markdown, la version 1.2.0 a ajouté les consignes de
-formatage et le marqueur de version, la version 1.1.0 a ajouté les consignes
+La version 1.6.0 est la version courante de ces consignes. `AGENTS.md`
+déclare cette version en tête de fichier afin d'identifier rapidement la
+version utilisée. La version 1.6.0 a ajouté le helper de mise à jour des
+consignes, avec commit et push automatiques en option, en préservant les
+adaptations et configurations de formatage des projets. La version 1.5.0 a
+ajouté les consignes de tests dans le navigateur : Playwright, Docker,
+environnements isolés, autorisations requises et compte rendu fidèle des
+tests exécutés. La version 1.4.0 a ajouté les consignes sur le contexte du
+projet et la maintenance de la documentation : consulter les documents
+pertinents avant les modifications, préserver les documents de référence et
+synchroniser le dépôt de manière plus prudente. La version 1.3.0 a ajouté
+les consignes Markdown, la version 1.2.0 a ajouté les consignes de formatage
+et le marqueur de version, la version 1.1.0 a ajouté les consignes
 explicites sur les signatures Perl, et la version 1.0.0 était la première
-version stable. Voir [CHANGELOG.md](CHANGELOG.md) pour le détail des versions.
+version stable. Voir [CHANGELOG.md](CHANGELOG.md) pour le détail des
+versions.
 
 Le fichier `AGENTS.md` pourra continuer à évoluer pour clarifier les consignes,
 supprimer les doublons, séparer les règles générales des règles propres à un
 outil, ou ajouter des variantes selon les types de projets Perl.
+
+[mise-a-jour]: DOCUMENTATION.fr.md#mise-à-jour-des-fichiers-agentsmd-existants

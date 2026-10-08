@@ -90,6 +90,26 @@ Then review `AGENTS.md` and adapt project-specific details such as test commands
 dependency tooling, preferred modules, or workflow rules. Keep `.perltidyrc`
 unchanged if you want to preserve the formatting style provided by this project.
 
+## Updating Existing Guidelines
+
+Use the helper to preview updates in repositories that already use these guidelines:
+
+```bash
+./update-agents.pl ../*/AGENTS.md
+```
+
+The report compares each file with published versions and preserves project-specific
+additions, edits, and deletions. Use `--apply` to update eligible repositories with
+clean working trees. Add `--commit-push` to apply, commit, and push automatically
+when the branch matches its upstream. Without that option, the helper suggests
+Git commands.
+See [DOCUMENTATION.md](DOCUMENTATION.md#updating-existing-agentsmd-files) for options,
+conflict handling, and validation commands.
+
+The helper updates only `AGENTS.md`. It neither copies nor modifies
+`.perltidyrc`, including with `--apply` or `--commit-push`, preserving each
+project's formatting style.
+
 ## Perl Formatting
 
 The repository includes a reference perltidy configuration in
@@ -116,17 +136,19 @@ This project is licensed under the MIT License. See [LICENSE](LICENSE).
 
 ## Project Status
 
-Version 1.5.0 is the current release of these guidelines. `AGENTS.md` declares
-this version at the top of the file so users can quickly identify which release
-they are using. Version 1.5.0 added browser-testing guidance covering Playwright,
-Docker, isolated environments, approval requirements, and accurate test reporting.
-Version 1.4.0 added project-context and documentation-lifecycle
-guidance, including consulting relevant documentation before changes,
-preserving canonical documentation, and safer repository synchronization.
-Version 1.3.0 added Markdown guidance, version 1.2.0 added formatting guidance
-and the version marker, version 1.1.0 added explicit Perl signature guidance,
-and version 1.0.0 was the first stable release. See
-[CHANGELOG.md](CHANGELOG.md) for release details.
+Version 1.6.0 is the current release of these guidelines. `AGENTS.md`
+declares this version at the top of the file so users can quickly identify
+which release they are using. Version 1.6.0 added the guideline update
+helper, including optional automatic commits and pushes while preserving
+project adaptations and formatting configurations. Version 1.5.0 added
+browser-testing guidance covering Playwright, Docker, isolated environments,
+approval requirements, and accurate test reporting. Version 1.4.0 added
+project-context and documentation-lifecycle guidance, including consulting
+relevant documentation before changes, preserving canonical documentation,
+and safer repository synchronization. Version 1.3.0 added Markdown guidance,
+version 1.2.0 added formatting guidance and the version marker, version
+1.1.0 added explicit Perl signature guidance, and version 1.0.0 was the
+first stable release. See [CHANGELOG.md](CHANGELOG.md) for release details.
 
 `AGENTS.md` may continue to evolve to clarify instructions, remove duplication,
 separate general rules from tool-specific rules, or add variants for different

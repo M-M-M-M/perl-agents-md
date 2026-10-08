@@ -7,6 +7,18 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## [Unreleased]
 
+## [1.6.0] - 2026-10-08
+
+### Added
+
+- Perl helper to preview or apply updates from tagged AGENTS.md releases while
+  preserving project-specific additions, edits, and deletions.
+- Manual-review reports for conflicts and unidentified versions, clean-tree
+  checks for application, and suggested commit and push commands.
+- Offline tests and bilingual helper documentation.
+- `--commit-push` to apply, commit, and push guideline updates automatically to
+  synchronized upstream branches, with recovery reports for publication failures.
+
 ## [1.5.0] - 2026-10-08
 
 ### Added
@@ -80,7 +92,8 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 - English and French project documentation.
 - MIT license and third-party attribution notices.
 
-[Unreleased]: https://github.com/M-M-M-M/perl-agents-md/compare/v1.5.0...HEAD
+[Unreleased]: https://github.com/M-M-M-M/perl-agents-md/compare/v1.6.0...HEAD
+[1.6.0]: https://github.com/M-M-M-M/perl-agents-md/compare/v1.5.0...v1.6.0
 [1.5.0]: https://github.com/M-M-M-M/perl-agents-md/compare/v1.4.0...v1.5.0
 [1.4.0]: https://github.com/M-M-M-M/perl-agents-md/compare/v1.3.1...v1.4.0
 [1.3.1]: https://github.com/M-M-M-M/perl-agents-md/compare/v1.3.0...v1.3.1
